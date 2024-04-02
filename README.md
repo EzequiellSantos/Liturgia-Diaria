@@ -1,15 +1,16 @@
 # Site Liturgia-Diaria
  Site para consulta da []liturgia diaria
 
-##Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 ## APIs
 
   As APIs utilizadas foram:
 
-    Externa daily-liturgia-diaria
+    Externa []daily-liturgia-diaria
 
-    E a minha própria API que funciona como proxy para contornar problemas de CORS
+    E a minha própria []API que funciona como
+    proxy para contornar problemas de CORS
 
 ## Descrição
 
