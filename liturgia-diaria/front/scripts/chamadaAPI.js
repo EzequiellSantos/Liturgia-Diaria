@@ -1,38 +1,29 @@
-const url = 'https://api-liturgia-diaria.vercel.app/'
+const url = 'https://intermediary-api.vercel.app/api'
 
-fetch(url, {
-    method: 'GET'
+fetch(url)
+.then(response => response.json())
+.then(data => {
+
+    consumirDados(data)
+
 })
-    .then(response => {
+.catch(error => {
 
-        if (!response.ok) {
-            throw new Error('Erro na chamada de API')
-        }
+    console.error('Error fetching data:', error);
 
-        return response.json()
-    })
-    .then(data => {
-
-        consumirDados(data)
-
-    })
-    .catch(error => {
-
-        console.error(error.message);
-
-    })
+});
 
 let firstLeitura = {
-    text: {}
+    text: ''
 }
 let salmosDay = {
-    text: {}
+    text: ''
 }
 let secondLeitura = {
-    text: {}
+    text: ''
 }
 let liturgia = {
-    text: {}
+    text: ''
 }
 
 function consumirDados(dados) {
@@ -47,8 +38,19 @@ function consumirDados(dados) {
     //coletando os dados do salmo
     salmosDay.text = dados.today.readings.psalm.all_html
 
-    //coletando segunda leitura
-    secondLeitura.text = dados.today.readings.second_reading.all_html
+    //verificando se possui segunda leitura
+    if(dados.hasOwnProperty('second_reading')){
+
+        //coletando segunda leitura
+        exibirSecondReading()
+        secondLeitura.text = dados.today.readings.second_reading.all_html
+
+    }else{
+
+        ocultarSecondReading()
+        console.log('Não há segunda leitura');
+
+    }
 
     //coletando liturgia
     liturgia.text = dados.today.readings.gospel.all_html
@@ -79,7 +81,6 @@ liOneLeitura.addEventListener('click', () => {
 
 })
 
-
 var liSalmos = document.querySelector('#liSalmos')
 liSalmos.addEventListener('click', () => {
 
@@ -101,11 +102,11 @@ LiTwoLeitura.addEventListener('click', () => {
 
 })
 
-var liLiturgia = document.querySelector('#liLiturgia')
-liLiturgia.addEventListener('click', () => {
+var liEvangelho = document.querySelector('#liEvangelho')
+liEvangelho.addEventListener('click', () => {
 
     oldSectionActive = sectionActive
-    sectionActive = liLiturgia
+    sectionActive = liEvangelho
     articleText.innerHTML = `${liturgia.text}`
     adequarEstilos()
 
@@ -115,14 +116,33 @@ function adequarEstilos() {
 
     /*  if(item.contains.classList('button-active')){
          item.clasList.remove('button-active')
-     } */
+        }  
+    */
 
 
     if (oldSectionActive != sectionActive) {
+
         oldSectionActive.classList.remove('button-active')
         sectionActive.classList.add('button-active')
+
     } else {
+
         sectionActive.classList.add('button-active')
+
     }
+
+}
+
+function ocultarSecondReading(){
+
+    LiTwoLeitura.style.display = 'none'
+    LiTwoLeitura.textContent = ''
+
+}
+
+function exibirSecondReading(){
+
+    LiTwoLeitura.style.display = 'block'
+    LiTwoLeitura.textContent = '2° Leitura'
 
 }
