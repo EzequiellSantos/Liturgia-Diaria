@@ -26,6 +26,12 @@ let liturgia = {
     text: ''
 }
 
+let color = {
+    cor: '',
+    hexLight: '',
+    hexDark: ''
+}
+
 function consumirDados(dados) {
 
     //mostrando a data da liturgia
@@ -54,6 +60,10 @@ function consumirDados(dados) {
 
     //coletando liturgia
     liturgia.text = dados.today.readings.gospel.all_html
+
+    //coletar a cor liturgica
+    color.cor = dados.today.color
+    colectCollors()
 
     gerarFirstLeitura()
 
@@ -144,5 +154,47 @@ function exibirSecondReading(){
 
     LiTwoLeitura.style.display = 'block'
     LiTwoLeitura.textContent = '2° Leitura'
+
+}
+
+function colectCollors() {
+
+    switch(color.cor){
+
+        case 'Branco':
+            color.hexLight = '#bebebe'
+            color.hexDark = '#828a94'
+            break
+        case 'Roxo':
+            color.hexLight = '#a56db9'
+            color.hexDark = '#674175'
+            break
+        case 'Vermelho':
+            color.hexLight = '#d88989'
+            color.hexDark = '#7a4c4c'
+            break
+        case 'Verde':
+            color.hexLight = '#83ac7e'
+            color.hexDark = '#557052'
+            break
+        case 'Rosa':
+            color.hexLight = '#f1a3d7'
+            color.hexDark = '#996482'
+            break   
+        case 'Preto':
+            color.hexLight = '#838182'
+            color.hexDark = '#504f4f'
+            break
+
+    }
+
+    adequarColor(color.hexLight, color.hexDark)
+}
+
+function adequarColor(corLight, corDark){
+
+    document.documentElement.style.setProperty('--color-main00', `${corDark}`)
+
+    document.documentElement.style.setProperty('--color-main01', `${corLight}`)
 
 }
