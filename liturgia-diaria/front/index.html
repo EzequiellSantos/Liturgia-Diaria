@@ -29,22 +29,14 @@
         var p = document.querySelector('#Get')
         p.addEventListener('click', () => {
 
-            fetch('https://intermediary-api.vercel.app/')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Erro ao buscar os dados');
-                    }
-                    return response.json();
-                })
+            fetch('https://intermediary-api.vercel.app/api')
+                .then(response => response.text())
                 .then(data => {
-                    console.log(data);
-                    console.log('hello');
-                    // Faça algo com os dados aqui
+                    console.log(data, 'hello');
                 })
                 .catch(error => {
                     console.error('Error fetching data:', error);
                 });
-
         })
     </script>
 </body>
