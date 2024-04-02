@@ -1,18 +1,34 @@
-const express = require('express');
+const http = require('http');
 const axios = require('axios');
 
-const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.get('/api', async (req, res) => {
-    try {
-        const response = await axios.get('https://api-liturgia-diaria.vercel.app/');
-        res.json(response.data);
-    } catch (error) {
-        res.status(500).json({ error: 'Erro ao buscar os dados' });
+const server = http.createServer(async (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*'); // Permitindo qualquer origem
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+    if (req.method === 'OPTIONS') {
+        res.writeHead(200);
+        res.end();
+        return;
+    }
+
+    if (req.url === '/api') {
+        try {
+            const response = await axios.get('https://api-liturgia-diaria.vercel.app/');
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify(response.data));
+        } catch (error) {
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'Erro ao buscar os dados' }));
+        }
+    } else {
+        res.writeHead(404);
+        res.end();
     }
 });
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
