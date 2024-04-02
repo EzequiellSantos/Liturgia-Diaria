@@ -1,0 +1,20 @@
+header{
+    background-color: transparent;
+}
+
+.embeds-audio{
+    display: none;
+}
+
+ul{
+    display: none;
+}
+
+footer::after{
+    font-weight: bolder;
+    content: 'https://ezequiellsantos.github.io/Litugia-Diaria/';
+}
+
+footer::before{
+    content: 'Página impressa do site'
+}

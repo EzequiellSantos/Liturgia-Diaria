@@ -1,1 +1,29 @@
 @charset "UTF-8";
+
+@media (628px <= width <= 992px) {
+
+    ul{
+        justify-content: space-evenly;
+    }
+
+    article#texto{
+        width: calc(88% - 10px);
+    }
+
+}
+
+@media (992px <= width) {
+
+    ul{
+        justify-content: center;
+    }
+
+    li{
+        margin: 0 10px;
+    }
+
+    article#texto{
+        width: calc(75% - 10px);
+    }
+
+}

@@ -1,5 +1,19 @@
 @charset "UTF-8";
 
+:root{
+    --color-main00: #504f4f;
+    --color-main01: #838182;
+
+    /* 
+    #828a94 - #bebebe - Branco 
+    #534857 - #9b73aa - Roxo
+    #7a4c4c - #d88989 - vermelho
+    #557052 - #83ac7e - Verde
+    #996482 - #f1a3d7 - rosa
+    #504f4f - #838182 - preto
+    */
+}
+
 *{
     padding: 0;
     margin: 0;
@@ -11,7 +25,7 @@ body{
 
 header{
     color: #fff ;
-    background-color: #714141;
+    background-color: var(--color-main00);
     padding: 5px 5px 0 5px;
 }
 
@@ -24,14 +38,12 @@ ul{
     list-style: none;
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
     margin-top: 30px;
 }
 
 li{
-    font-size: 0.9em;
-    margin: 0px 5px;
+    font-size: 1em;
     cursor: default;
 }
 
@@ -47,6 +59,7 @@ li.buttons{
 
 main{
     width: 100%;
+    padding-bottom: 30px;
 }
 
 section#passagem{
@@ -60,9 +73,12 @@ section#passagem{
 article#texto{
     margin: auto;
     margin-top: 30px;
-    width: calc(90% - 20px);
-    font-size: 1.28em; 
-    line-height: 2.2em;
+    width: calc(90% - 10px);
+
+    font-family: Arial, sans-serif;
+    font-size: 1.1em; 
+    line-height: 2.1em;
+    letter-spacing: 0.05em;
 }
 
 p#finish{
@@ -83,11 +99,21 @@ p#response::before{
 }
 
 @keyframes focus {
+
     0%{
         background-color: none;
     }
 
     100%{
-        background-color: #f1a5a5;
+        background-color: var(--color-main01);
     }
+
+}
+
+@media (width <= 768px) {
+
+    ul{
+        justify-content: space-around;
+    }
+    
 }
