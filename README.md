@@ -1,16 +1,19 @@
 # Site Liturgia-Diaria
- Site para consulta da []liturgia diaria
+ Site para consulta da [Liturgia Diaria](https://ezequiellsantos.github.io/Liturgia-Diaria/)
 
 ## Tecnologias Utilizadas
 
+  - Node.js com a blibioteca  `axios`
+  - Vercel
+  - HTML & CSS
+
 ## APIs
 
-  As APIs utilizadas foram:
+  As APIs utilizadas foram utilizadas:
 
-    Externa []daily-liturgia-diaria
+  - Externa [daily-liturgia-diaria](https://api-liturgia-diaria.vercel.app/)
 
-    E a minha própria []API que funciona como
-    proxy para contornar problemas de CORS
+  - E a minha própria [API](https://intermediary-api.vercel.app/api) que utiliza Node.js, hospedada no vercel que funciona como proxy para contornar problemas de CORS no navegador
 
 ## Descrição
 
