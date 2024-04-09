@@ -45,7 +45,7 @@ function consumirDados(dados) {
     salmosDay.text = dados.today.readings.psalm.all_html
 
     //verificando se possui segunda leitura
-    if(dados.hasOwnProperty('second_reading')){
+    if(dados.today.readings.hasOwnProperty('second_reading')){
 
         //coletando segunda leitura
         exibirSecondReading()
