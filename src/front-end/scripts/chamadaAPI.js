@@ -82,6 +82,11 @@ function gerarFirstLeitura() {
     sectionActive = liOneLeitura
     articleText.innerHTML = `${firstLeitura.text}`
     adequarEstilos()
+    exibirLoad()
+
+    liOneLeitura.textContent = '1° Leitura'
+    liSalmos.textContent = 'Salmos'
+    liEvangelho.textContent = 'Evangelho'
 
 }
 
@@ -159,6 +164,7 @@ function exibirSecondReading(){
 
 function colectCollors() {
 
+    //definindo cor liturgica para adequar ao site
     switch(color.cor){
 
         case 'Branco':
@@ -198,3 +204,17 @@ function adequarColor(corLight, corDark){
     document.documentElement.style.setProperty('--color-main01', `${corLight}`)
 
 }
+
+/* 
+    tela de carregamento
+*/
+var loadItem = document.querySelector(".loading")
+function exibirLoad(){
+    if(articleText.hasChildNodes()){
+        loadItem.style.display = 'none'
+    } else{
+        loadItem.style.display = 'flex'
+    }
+}
+
+exibirLoad()

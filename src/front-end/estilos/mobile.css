@@ -28,6 +28,8 @@ header{
     background-image: linear-gradient(140deg, #504f4f5d, var(--color-main00)70%);
     background-color: var(--color-main00);
     padding: 5px 5px 0 5px;
+    transition: height, background 0.7s ease-in-out;
+    font-family: Verdana, Geneva sans-serif;
 }
 
 header > p, h1{
@@ -78,8 +80,12 @@ article#texto{
 
     font-family: Arial, sans-serif;
     font-size: 1.1em; 
-    line-height: 2.1em;
+    line-height: 2em;
     letter-spacing: 0.05em;
+}
+
+article#texto > p {
+    margin: 20px 0px;
 }
 
 p#finish{
@@ -117,4 +123,39 @@ p#response::before{
         justify-content: space-around;
     }
     
+}
+
+.loading{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.item{
+    height: 15px;
+    width: 15px;
+    margin: 0px 10px 0px 0px;
+    background-color: #8a8a8a7e;
+    border-radius: 50%;
+    animation: load 0.6s infinite alternate;
+}
+
+.loading .item:nth-child(2){
+    animation-delay: 100ms;
+}
+
+.loading .item:nth-child(3){
+    animation-delay: 200ms;
+}
+
+@keyframes load {
+    to {
+        transform: translateY(7px);
+    }
 }
