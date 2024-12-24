@@ -1,10 +1,11 @@
-const url = 'https://intermediary-api.vercel.app/apii'
+const url = 'https://intermediary-api.vercel.app/api'
 
 fetch(url)
 .then(response => response.json())
 .then(data => {
 
     consumirDados(data)
+    console.log(data)
 
 })
 .catch(error => {
@@ -14,16 +15,25 @@ fetch(url)
 });
 
 let firstLeitura = {
-    text: ''
+    text: '',
+    referencia:'',
+    titulo:''
+
 }
 let salmosDay = {
-    text: ''
+    text: '',
+    referencia:'',
+    refrao:''
 }
 let secondLeitura = {
-    text: ''
+    text: '',
+    referencia:'',
+    titulo:''
 }
 let liturgia = {
-    text: ''
+    text: '',
+    referencia:'',
+    titulo:''
 }
 
 let color = {
@@ -35,21 +45,26 @@ let color = {
 function consumirDados(dados) {
 
     //mostrando a data da liturgia
-    date.textContent = `${dados.today.date}`
-    liturgicalDay.textContent = `${dados.today.entry_title}`
+    date.textContent = `${dados.data}`
+    liturgicalDay.textContent = `${dados.liturgia}`
 
     //coletando os dados da primeira leitura
-    firstLeitura.text = dados.today.readings.first_reading.all_html
+    firstLeitura.text = dados.primeiraLeitura.texto
+    firstLeitura.referencia = dados.primeiraLeitura.referencia
+    firstLeitura.titulo = dados.primeiraLeitura.titulo
 
     //coletando os dados do salmo
-    salmosDay.text = dados.today.readings.psalm.all_html
+    salmosDay.text = dados.salmo.texto
+    salmosDay.referencia = dados.salmo.referencia
+    salmosDay.refrao = dados.salmo.refrao
 
     //verificando se possui segunda leitura
-    if(dados.today.readings.hasOwnProperty('second_reading')){
-
+    if(dados.segundaLeitura != "Não há segunda leitura hoje!"){
         //coletando segunda leitura
         exibirSecondReading()
-        secondLeitura.text = dados.today.readings.second_reading.all_html
+        secondLeitura.text = dados.segundaLeitura.texto
+        secondLeitura.referencia = dados.segundaLeitura.referencia
+        secondLeitura.titulo = dados.segundaLeitura.titulo
 
     }else{
 
@@ -59,10 +74,12 @@ function consumirDados(dados) {
     }
 
     //coletando liturgia
-    liturgia.text = dados.today.readings.gospel.all_html
+    liturgia.text = dados.evangelho.texto
+    liturgia.referencia = dados.evangelho.referencia
+    liturgia.titulo = dados.evangelho.titulo
 
     //coletar a cor liturgica
-    color.cor = dados.today.color
+    color.cor = dados.cor
     colectCollors()
 
     gerarFirstLeitura()
@@ -80,7 +97,7 @@ function gerarFirstLeitura() {
 
     oldSectionActive = sectionActive
     sectionActive = liOneLeitura
-    articleText.innerHTML = `${firstLeitura.text}`
+    articleText.innerHTML = `${firstLeitura.referencia} <br> ${firstLeitura.titulo} <br> ${firstLeitura.text}`
     adequarEstilos()
     exibirLoad()
 
@@ -101,7 +118,7 @@ liSalmos.addEventListener('click', () => {
 
     oldSectionActive = sectionActive
     sectionActive = liSalmos
-    articleText.innerHTML = `${salmosDay.text}`
+    articleText.innerHTML = `${salmosDay.referencia} <br> ${salmosDay.refrao} <br> ${salmosDay.text}`
     adequarEstilos()
 
 
@@ -112,7 +129,7 @@ LiTwoLeitura.addEventListener('click', () => {
 
     oldSectionActive = sectionActive
     sectionActive = LiTwoLeitura
-    articleText.innerHTML = `${secondLeitura.text}`
+    articleText.innerHTML = `${secondLeitura.referencia} <br> ${secondLeitura.titulo} <br> ${secondLeitura.text}`
     adequarEstilos()
 
 })
@@ -122,7 +139,7 @@ liEvangelho.addEventListener('click', () => {
 
     oldSectionActive = sectionActive
     sectionActive = liEvangelho
-    articleText.innerHTML = `${liturgia.text}`
+    articleText.innerHTML = `${liturgia.referencia} <br> ${liturgia.titulo} <br> ${liturgia.text}`
     adequarEstilos()
 
 })
@@ -133,7 +150,6 @@ function adequarEstilos() {
          item.clasList.remove('button-active')
         }  
     */
-
 
     if (oldSectionActive != sectionActive) {
 
@@ -195,6 +211,7 @@ function colectCollors() {
     }
 
     adequarColor(color.hexLight, color.hexDark)
+
 }
 
 function adequarColor(corLight, corDark){
@@ -210,11 +227,17 @@ function adequarColor(corLight, corDark){
 */
 var loadItem = document.querySelector(".loading")
 function exibirLoad(){
+
     if(articleText.hasChildNodes()){
+
         loadItem.style.display = 'none'
+
     } else{
+
         loadItem.style.display = 'flex'
+
     }
+
 }
 
 exibirLoad()
