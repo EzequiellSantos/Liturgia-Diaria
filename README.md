@@ -11,7 +11,7 @@
 
   As APIs utilizadas foram utilizadas:
 
-  - Externa [daily-liturgia-diaria](https://api-liturgia-diaria.vercel.app/)
+  - Externa [daily-liturgia-diaria](https://liturgia.up.railway.app/)
 
   - E a minha própria [API](https://intermediary-api.vercel.app/api) que utiliza Node.js, hospedada no vercel que funciona como proxy para contornar problemas de CORS no navegador
 

@@ -35,11 +35,12 @@
         var p = document.querySelector('#Get')
         p.addEventListener('click', () => {
 
-            fetch('https://intermediary-api.vercel.app/api')
+            fetch('https://liturgia.up.railway.app/')
                 .then(response => response.json())
                 .then(data => {
                     console.log(data, 'hello');
-                    res.textContent = data.objective
+                    res.textContent = data
+
                 })
                 .catch(error => {
                     console.error('Error fetching data:', error);

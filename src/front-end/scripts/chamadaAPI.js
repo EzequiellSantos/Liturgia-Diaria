@@ -1,4 +1,4 @@
-const url = 'https://intermediary-api.vercel.app/api'
+const url = 'https://intermediary-api.vercel.app/apii'
 
 fetch(url)
 .then(response => response.json())
