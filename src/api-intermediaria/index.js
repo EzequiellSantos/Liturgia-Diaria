@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
 
     if (req.url === '/api') {
         try {
-            const response = await axios.get('https://api-liturgia-diaria.vercel.app/');
+            const response = await axios.get('https://liturgia.up.railway.app/');
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify(response.data));
         } catch (error) {
